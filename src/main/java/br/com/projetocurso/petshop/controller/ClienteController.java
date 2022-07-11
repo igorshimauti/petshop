@@ -23,7 +23,7 @@ public class ClienteController {
         return ResponseEntity.created(localizacao).body(clienteIncluido);
     }
 
-    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
         cliente.setId(id);
         Cliente clienteAtualizado = clienteService.salvar(cliente);
