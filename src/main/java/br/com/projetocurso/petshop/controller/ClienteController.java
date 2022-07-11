@@ -5,10 +5,7 @@ import br.com.projetocurso.petshop.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 
@@ -25,4 +22,13 @@ public class ClienteController {
         URI localizacao = URI.create("cliente/" + clienteIncluido.getId());
         return ResponseEntity.created(localizacao).body(clienteIncluido);
     }
+
+    @PostMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Cliente> atualizar(@PathVariable Long id, @RequestBody Cliente cliente) {
+        cliente.setId(id);
+        Cliente clienteAtualizado = clienteService.salvar(cliente);
+        return ResponseEntity.ok().body(clienteAtualizado);
+    }
+
+
 }
